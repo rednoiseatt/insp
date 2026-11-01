@@ -29,7 +29,15 @@ aspect-ratio: 1;
     opacity: 1; transition: opacity 1.8s ease;
   }
   .die img { width: 100%; height: 100%; display: block; pointer-events: none; }
-  body.showing .die { opacity: 0; pointer-events: none; }
+  body.showing .die {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.8s ease;
+}
+
+body:not(.showing) .die {
+  transition: opacity 1.8s ease 1s;
+}
 
   /* the prompt */
   .prompt {
