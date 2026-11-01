@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Inspiration">
+<meta name="theme-color" content="#000000">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="apple-touch-icon.png">
+<title>Inspiration</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    font-family: Georgia, "Times New Roman", serif;
+    -webkit-user-select: none; user-select: none;
+    touch-action: manipulation;
+  }
+
+  /* the die is the button */
+  .die {
+    display: block; padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
+    width: min(65vw, 50vh, 360px);
+aspect-ratio: 1;
+    opacity: 1; transition: opacity 1.8s ease;
+  }
+  .die img { width: 100%; height: 100%; display: block; pointer-events: none; }
+  body.showing .die { opacity: 0; pointer-events: none; }
+
+  /* the prompt */
+  .prompt {
+    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+    padding: 40px 34px; text-align: center; color: #f1ebdc;
+    font-size: clamp(26px, 7vw, 38px); line-height: 1.3; letter-spacing: .01em;
+    opacity: 0; pointer-events: none; transition: opacity 1s ease;
+    word-break: break-word;
+  }
+  body.showing .prompt { opacity: 1; pointer-events: auto; transition: opacity 1.8s ease 1s; }
+</style>
+</head>
+<body>
+  <button class="die" id="die" aria-label="Get a prompt"><img src="die.png" alt=""></button>
+  <div class="prompt" id="prompt"></div>
+
+<script>
+// YOUR PROMPTS: one per line, in quotes, each followed by a comma.
+const prompts = [
+  "test",
+  "test2",
+  "test3",
+];
+
+const die = document.getElementById('die');
+const box = document.getElementById('prompt');
+let bag = [], last = null, busy = false;
+
+function next() {
+  if (!prompts.length) return "Add your prompts to the list in the file.";
+  if (!bag.length) {
+    bag = prompts.slice();
+    for (let i = bag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [bag[i], bag[j]] = [bag[j], bag[i]];
+    }
+    if (bag.length > 1 && bag[bag.length - 1] === last) bag.unshift(bag.pop());
+  }
+  last = bag.pop();
+  return last;
+}
+
+function lock() { busy = true; setTimeout(() => { busy = false; }, 2800); }
+
+die.addEventListener('click', () => {
+  if (busy) return;
+  lock();
+  box.textContent = next();
+  document.body.classList.add('showing');
+});
+
+box.addEventListener('click', () => {
+  if (busy) return;
+  lock();
+  document.body.classList.remove('showing');
+});
+</script>
+</body>
+</html>
