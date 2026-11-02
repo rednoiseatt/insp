@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#000000">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="apple-touch-icon.png">
+ <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
 <title>Inspiratie</title>
 <style>
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -16,7 +17,7 @@
   body {
     display: flex; align-items: center; justify-content: center;
     padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
-    font-family: Georgia, "Times New Roman", serif;
+   font-family: 'Libre Baskerville', Georgia, serif;
     -webkit-user-select: none; user-select: none;
     touch-action: manipulation;
   }
@@ -40,13 +41,24 @@ body:not(.showing) .die {
 }
 
   /* the prompt */
-  .prompt {
-    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-    padding: 40px 34px; text-align: center; color: #f1ebdc;
-    font-size: clamp(26px, 7vw, 38px); line-height: 1.3; letter-spacing: .01em;
-    opacity: 0; pointer-events: none; transition: opacity 1s ease;
-    word-break: break-word;
-  }
+ .prompt {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 34px;
+  text-align: center;
+  color: #f1ebdc;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: clamp(27px, 7vw, 39px);
+  line-height: 1.4;
+  letter-spacing: -.035em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  word-break: break-word;
+}
   body.showing .prompt { opacity: 1; pointer-events: auto; transition: opacity 1.8s ease 1s; }
 </style>
 </head>
