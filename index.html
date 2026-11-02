@@ -47,17 +47,9 @@ body:not(.showing) .die {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 34px;
+  padding: calc(40px + env(safe-area-inset-top)) 34px calc(40px + env(safe-area-inset-bottom));
   text-align: center;
-  color: #f1ebdc;
-  font-family: 'Libre Baskerville', Georgia, serif;
-  font-size: clamp(27px, 7vw, 39px);
-  line-height: 1.4;
-  letter-spacing: -.035em;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s ease;
-  word-break: break-word;
+  transform: translateY(-2%);
 }
   body.showing .prompt { opacity: 1; pointer-events: auto; transition: opacity 1.8s ease 1s; }
 </style>
